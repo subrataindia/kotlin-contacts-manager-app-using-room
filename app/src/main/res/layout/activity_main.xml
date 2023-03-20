@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="userViewModel"
+            type="com.example.contactsmanager.videmodel.UserViewModel" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contacts Manager"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint2"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title">
+            <EditText
+                android:id="@+id/name"
+                android:text="@={userViewModel.inputName}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="250dp"
+                android:hint="Please Enter Name"
+                android:layout_height="wrap_content"/>
+            <EditText
+                android:id="@+id/email"
+                android:text="@={userViewModel.inputEmail}"
+                app:layout_constraintTop_toBottomOf="@+id/name"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_width="250dp"
+                android:hint="Please Enter Email"
+                android:layout_height="wrap_content"/>
+            <Button
+                android:onClick="@{()->userViewModel.saveOrUpdate()}"
+                android:id="@+id/save"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@={userViewModel.saveOrUpdateButtonText}"
+                android:layout_marginRight="20dp"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"/>
+            <Button
+                android:id="@+id/delete"
+                android:onClick="@{() -> userViewModel.clearAllOrDelete()}"
+                app:layout_constraintTop_toBottomOf="@id/save"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@={userViewModel.deleteButtonText}"
+                android:layout_marginRight="20dp"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraint2" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
